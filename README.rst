@@ -1,8 +1,6 @@
 PassiveTotal Maltego Transforms
 ===============================
 
-**These transforms come with no suppport and are only provided as a convenience**
-
 Introduction
 ------------
 
@@ -30,6 +28,11 @@ Add the following line to your Apache WSGI file::
     from ptxforms import ez_import
 
 Login to your iTDS interface and enter all of the routes listed in maltego_transform_sheet.txt
+
+Support
+-------
+
+These transforms come with no suppport and are only provided as a convenience. Our preferred method for accessing these transforms is using the Maltego transform hub which interfaces with Malformity Labs. Any questions, issues or problems should be directed to Github issues for the fastest triage.
 
 
 Troubleshooting
