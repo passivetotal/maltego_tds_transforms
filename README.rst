@@ -11,23 +11,23 @@ PassiveTotal provides extensive Maltego transforms through our hosting partner, 
 Installation
 ------------
 
-In order to run these transforms, you will need a working TDS server from Paterva_.
+*In order to run these transforms, you will need a working TDS server from Paterva_.*
 
 .. _Paterva: http://www.paterva.com/web6/documentation/developer-tds.php
 
-Setup your transform server and install the Python libraries by following these instructions_.
+1. Setup your transform server and install the Python libraries by following these instructions_.
 
 .. _instructions: http://www.paterva.com/web6/documentation/TRX_documentation20130403.pdf
 
-Install the requirements for the transforms::
+2. Install the requirements for the transforms::
 
     $ pip install -r requirements.txt
 
-Add the following line to your Apache WSGI file::
+3. Add the following line to your Apache WSGI file::
 
     from ptxforms import ez_import
 
-Login to your iTDS interface and enter all of the routes listed in maltego_transform_sheet.txt
+4. Login to your iTDS interface and enter all of the routes listed in maltego_transform_sheet.txt
 
 Support
 -------
