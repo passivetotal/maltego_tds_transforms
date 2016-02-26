@@ -1,9 +1,11 @@
+from bottle import request
 from bottle import route
 from passivetotal.libs.attributes import AttributeRequest
 from ptxforms import load_maltego
 from ptxforms.common.response import blank_response
 from ptxforms.common.response import error_response
 from ptxforms.common.response import maltego_response
+from ptxforms.common.utilities import gen_debug
 from ptxforms.common.utilities import safe_symbols
 # const
 from ptxforms.common.const import LABEL_BLACKLISTED
@@ -38,7 +40,7 @@ def load_client(context):
         version = context.getTransformSetting('version')
         return AttributeRequest(username, api_key, server, version)
     else:
-        return AttributeRequest(username, api_key)
+        return AttributeRequest(username, api_key, headers=gen_debug(request))
 
 
 @route(ROUTE_GET_ATTRIBUTE_TRACKERS, method="ANY")
@@ -53,7 +55,7 @@ def get_host_attribute_trackers(trx, context):
 
     results = response.get('results', [])
     if len(results) == 0:
-        return blank_response(response)
+        return blank_response(trx, response)
 
     for item in results:
         entity_name = "pt.tracker%s" % item.get('attributeType')
@@ -83,7 +85,7 @@ def get_host_attribute_components(trx, context):
 
     results = response.get('results', [])
     if len(results) == 0:
-        return blank_response(response)
+        return blank_response(trx, response)
 
     for item in results:
         entity_value = "%s (%s)" % (item.get('label'), item.get('category'))
@@ -110,7 +112,7 @@ def run_tracker_search(trx, context, field):
 
     results = response.get('results', [])
     if len(results) == 0:
-        return blank_response(response)
+        return blank_response(trx, response)
 
     for item in results:
         ent = trx.addEntity(MALTEGO_DOMAIN, safe_symbols(item.get('hostname')))

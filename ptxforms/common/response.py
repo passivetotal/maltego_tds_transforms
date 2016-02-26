@@ -34,7 +34,7 @@ def error_response(trx, response):
     trx.addUIMessage(format_error(response), UIM_FATAL)
     if response['error'].get('http_code', 500) == 401:
         # HTTP code for Maltego mis-matched authentication
-        status_code = 406
+        status_code = 600
     elif response['error'].get('http_code', 500) == 403:
         # Avoid popping a direct error and return a phrase
         ent = trx.addEntity(MALTEGO_PHRASE, "Daily Query Limit Reached")

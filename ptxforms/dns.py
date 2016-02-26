@@ -1,8 +1,10 @@
+from bottle import request
 from bottle import route
 from passivetotal.libs.dns import DnsRequest
 from ptxforms import load_maltego
 from ptxforms.common.response import error_response
 from ptxforms.common.response import maltego_response
+from ptxforms.common.utilities import gen_debug
 from ptxforms.common.utilities import safe_symbols
 # const
 from ptxforms.common.const import MALTEGO_IP
@@ -35,7 +37,7 @@ def load_client(context):
         version = context.getTransformSetting('version')
         return DnsRequest(username, api_key, server, version)
     else:
-        return DnsRequest(username, api_key)
+        return DnsRequest(username, api_key, headers=gen_debug(request))
 
 
 @route(ROUTE_GET_PASSIVE, method="ANY")

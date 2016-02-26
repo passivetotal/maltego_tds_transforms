@@ -1,8 +1,10 @@
+from bottle import request
 from bottle import route
 from passivetotal.libs.actions import ActionsClient
 from ptxforms import load_maltego
 from ptxforms.common.response import error_response
 from ptxforms.common.response import maltego_response
+from ptxforms.common.utilities import gen_debug
 from ptxforms.common.utilities import safe_symbols
 # const
 from ptxforms.common.const import MALTEGO_PHRASE
@@ -22,8 +24,8 @@ from ptxforms.common.routes import ROUTE_SET_SUSPICIOUS
 from ptxforms.common.routes import ROUTE_SET_UNKNOWN
 
 
-# import logging
-# logging.basicConfig(level=logging.DEBUG)
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 
 def load_client(context):
@@ -36,7 +38,7 @@ def load_client(context):
         version = context.getTransformSetting('version')
         return ActionsClient(username, api_key, server, version)
     else:
-        return ActionsClient(username, api_key)
+        return ActionsClient(username, api_key, headers=gen_debug(request))
 
 
 @route(ROUTE_GET_TAGS, method="ANY")

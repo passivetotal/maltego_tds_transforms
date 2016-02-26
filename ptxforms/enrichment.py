@@ -1,8 +1,10 @@
+from bottle import request
 from bottle import route
 from passivetotal.libs.enrichment import EnrichmentRequest
 from ptxforms import load_maltego
 from ptxforms.common.response import error_response
 from ptxforms.common.response import maltego_response
+from ptxforms.common.utilities import gen_debug
 from ptxforms.common.utilities import safe_symbols
 from ptxforms.common.utilities import value_type
 # const
@@ -38,7 +40,7 @@ def load_client(context):
         version = context.getTransformSetting('version')
         return EnrichmentRequest(username, api_key, server, version)
     else:
-        return EnrichmentRequest(username, api_key)
+        return EnrichmentRequest(username, api_key, headers=gen_debug(request))
 
 
 @route(ROUTE_GET_ENRICHMENT, method="ANY")

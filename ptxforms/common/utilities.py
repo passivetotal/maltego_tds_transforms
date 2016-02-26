@@ -1,4 +1,19 @@
 from IPy import IP
+from ptxforms.common.const import PT_HEADERS
+
+
+def gen_debug(request, extras=None):
+    """Generate a debug object we can log."""
+    dbg = {
+        'PT-Origin-Request': request.remote_addr,
+        'PT-Requested-Url': request.url,
+        'PT-Origin-UA': request.environ.get('HTTP_USER_AGENT'),
+    }
+    dbg.update(PT_HEADERS)
+    if extras:
+        dbg.update(extras)
+
+    return dbg
 
 
 def value_type(value):

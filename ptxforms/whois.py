@@ -1,9 +1,11 @@
+from bottle import request
 from bottle import route
 from passivetotal.libs.whois import WhoisRequest
 from ptxforms import load_maltego
+from ptxforms.common.response import blank_response
 from ptxforms.common.response import error_response
 from ptxforms.common.response import maltego_response
-from ptxforms.common.response import blank_response
+from ptxforms.common.utilities import gen_debug
 from ptxforms.common.utilities import safe_symbols
 from ptxforms.common.utilities import upper_first
 # const
@@ -33,7 +35,7 @@ def load_client(context):
         version = context.getTransformSetting('version')
         return WhoisRequest(username, api_key, server, version)
     else:
-        return WhoisRequest(username, api_key)
+        return WhoisRequest(username, api_key, headers=gen_debug(request))
 
 
 @route(ROUTE_GET_WHOIS, method="ANY")
