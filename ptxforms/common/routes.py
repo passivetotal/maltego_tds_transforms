@@ -9,6 +9,7 @@ ROUTE_GET_MALWARE = "/get_malware"
 ROUTE_GET_MONITOR = '/get_monitor'
 ROUTE_GET_OSINT = '/get_osint'
 ROUTE_GET_OSINT_DETAILS = '/get_osint_details'
+ROUTE_GET_OSINT_PASSIVE = '/get_osint_passive_dns'
 ROUTE_GET_PASSIVE = '/get_passive_dns'
 ROUTE_GET_PASSIVE_WITH_TIME = '/get_passive_dns_with_time'
 ROUTE_GET_SINKHOLE = '/get_sinkhole'

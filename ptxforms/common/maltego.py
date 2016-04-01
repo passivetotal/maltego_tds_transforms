@@ -92,7 +92,7 @@ class MaltegoEntity(object):
     def returnEntity(self):
         r=''
         r+= "<Entity Type=\"" + str(self.entityType) + "\">"
-        r+= "<Value>" + str(self.value) + "</Value>"
+        r+= "<Value>" + str(self.value.encode('utf-8')) + "</Value>"
         r+= "<Weight>" + str(self.weight) + "</Weight>"
         if (len(self.displayInformation) > 0):
             r+= "<DisplayInformation>"

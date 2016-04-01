@@ -5,6 +5,19 @@ from ptxforms.common.maltego import UIM_FATAL
 from ptxforms.common.maltego import UIM_INFORM
 
 
+def custom_exception(code, string):
+    """Generate a custom Maltego exception for worst cases."""
+    message = ''
+    message += "<MaltegoMessage>"
+    message += "<MaltegoTransformExceptionMessage>"
+    message += "<Exceptions>"
+    message += "<Exception code=\"%d\">%s</Exception>" % (code, string)
+    message += "</Exceptions>"
+    message += "</MaltegoTransformExceptionMessage>"
+    message += "</MaltegoMessage>"
+    return message
+
+
 def format_error(response):
     """Format the error to be sent back to the user.
 
@@ -22,7 +35,12 @@ def format_error(response):
 
 def maltego_response(trx, status_code=200, override=None):
     """Return a properly formatted Maltego response."""
-    response = trx.returnOutput()
+    try:
+        response = trx.returnOutput()
+    except Exception as err:
+        msg = "Encountered errors in Maltegos Python library."
+        override = custom_exception(681, msg)
+
     if override:
         response = override
     return HTTPResponse(status=status_code, body=response)
@@ -37,15 +55,7 @@ def error_response(trx, response):
     if response['error'].get('http_code', 500) == 401:
         # HTTP code for Maltego mis-matched authentication
         status_code = 200
-        message = ''
-        message += "<MaltegoMessage>"
-        message += "<MaltegoTransformExceptionMessage>"
-        message += "<Exceptions>"
-        message += "<Exception code=\"600\">API/Username invalid</Exception>"
-        message += "</Exceptions>"
-        message += "</MaltegoTransformExceptionMessage>"
-        message += "</MaltegoMessage>"
-
+        message = custom_exception(600, "API/Username invalid")
         # Needed in order to prompt the user -- Maltego fails any other way
         return maltego_response(trx, status_code, message)
 
