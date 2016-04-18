@@ -131,7 +131,7 @@ def get_host_attribute_parent_pairs(trx, context):
         return blank_response(trx, response)
 
     for item in results:
-        ent = trx.addEntity(MALTEGO_DOMAIN, safe_symbols(item.get('child')))
+        ent = trx.addEntity(MALTEGO_DOMAIN, safe_symbols(item.get('parent')))
         ent.addProperty(LABEL_FIRST_SEEN, LABEL_FIRST_SEEN,
                         'loose', safe_symbols(item.get('firstSeen', 'N/A')))
         ent.addProperty(LABEL_LAST_SEEN, LABEL_LAST_SEEN,
@@ -159,7 +159,7 @@ def get_host_attribute_child_pairs(trx, context):
         return blank_response(trx, response)
 
     for item in results:
-        ent = trx.addEntity(MALTEGO_DOMAIN, safe_symbols(item.get('parent')))
+        ent = trx.addEntity(MALTEGO_DOMAIN, safe_symbols(item.get('child')))
         ent.addProperty(LABEL_FIRST_SEEN, LABEL_FIRST_SEEN,
                         'loose', safe_symbols(item.get('firstSeen', 'N/A')))
         ent.addProperty(LABEL_LAST_SEEN, LABEL_LAST_SEEN,
