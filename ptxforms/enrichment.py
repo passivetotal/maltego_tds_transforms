@@ -19,6 +19,7 @@ from ptxforms.common.const import MALTEGO_PHRASE
 from ptxforms.common.const import MALTEGO_PT_TAG
 from ptxforms.common.const import MALTEGO_URL
 from ptxforms.common.const import MALFORMITY_HASH
+from ptxforms.common.const import MALTEGO_HASH
 # routes
 from ptxforms.common.routes import ROUTE_GET_ENRICHMENT
 from ptxforms.common.routes import ROUTE_GET_MALWARE
@@ -154,6 +155,6 @@ def get_malware(trx, context):
     for item in response.get('results', []):
         trx.addEntity(MALTEGO_PHRASE, safe_symbols(item.get('source')))
         trx.addEntity(MALTEGO_URL, safe_symbols(item.get('sourceUrl')))
-        trx.addEntity(MALFORMITY_HASH, safe_symbols(item.get('sample')))
+        trx.addEntity(MALTEGO_HASH, safe_symbols(item.get('sample')))
 
     return maltego_response(trx)
