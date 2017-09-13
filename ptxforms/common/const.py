@@ -16,6 +16,7 @@ MALTEGO_URL = 'maltego.URL'
 MALTEGO_EMAIL = 'maltego.EmailAddress'
 MALTEGO_COUNTRY = 'maltego.Location'
 MALFORMITY_HASH = 'malformity.Hash'
+MALTEGO_HASH = 'maltego.Hash'
 
 LABEL_FIRST_SEEN = 'First Seen'
 LABEL_LAST_SEEN = 'Last Seen'
