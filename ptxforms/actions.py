@@ -62,7 +62,7 @@ def add_tags(trx, context):
     """Add tags to query value."""
     query_value = context.Value
     client = load_client(context)
-    raw_tags = context.getProperty('tags')
+    raw_tags = context.getTransformSetting('Tags')
     tags = [x.strip() for x in raw_tags.split(',')]
     response = client.add_tags(query=query_value, tags=tags)
     if 'error' in response:
