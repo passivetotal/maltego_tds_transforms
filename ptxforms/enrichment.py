@@ -135,8 +135,9 @@ def get_subdomains(trx, context):
     if 'error' in response:
         return error_response(trx, response)
 
+    domain = response.get('primaryDomain', query_value)
     for item in response.get('subdomains', []):
-        entity_value = "%s.%s" % (item, query_value)
+        entity_value = "%s.%s" % (item, domain)
         trx.addEntity(MALTEGO_DOMAIN, safe_symbols(entity_value))
 
     return maltego_response(trx)
